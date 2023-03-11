@@ -5,6 +5,7 @@ import time
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
@@ -52,15 +53,23 @@ while True:
         gui.press('Right')
         print(driver.current_url);
         # get the image source
-        img = driver.find_element('//*[@id="mount_0_0_fw"]/div/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[1]/div/div[1]/div[2]/div/div/div/ul/li[2]/div/div/div/div/div[1]/div[1]/img')
-        print(src);
-        src = img.get_attribute('srcset')
-        print(src);
-        # urllib.urlretrieve(src)
-        src = img.get_attribute('src')
-        # filename = datetime.now().strftime('%Y%m%d%hh%mm%ss')
-        # print(filename)
-        print(src);
+        img = driver.find_elements(By.XPATH,'//*[@id="mount_0_0_fw"]/div/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[1]/div/div[1]/div[2]/div/div/div/ul/li[2]/div/div/div/div/div[1]/div[1]/img')
+        # img2 =driver.findElement(By.cssSelector("img")).getAttribute("src")
+        img2 = driver.find_elements(By.CSS_SELECTOR,"img")
+        print(img)
+        print(img.getattr("src"))
+        print(img.getattr("srcset"))
+
+        print(img2.getattr("src"))
+        print(img2.getattr("srcset"))
+        # print(src);
+        # src = img.get_attribute('srcset')
+        # print(src);
+        # # urllib.urlretrieve(src)
+        # src = img.get_attribute('src')
+        # # filename = datetime.now().strftime('%Y%m%d%hh%mm%ss')
+        # # print(filename)
+        # print(src);
         # download the image
         # urllib.urlretrieve(src)
     except Exception as ex:
